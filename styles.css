@@ -1,0 +1,45 @@
+* {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+body {
+    display: flex;
+    background: rgb(230, 230, 230);
+    margin-top: 2rem;
+    margin-left: 2rem;
+}
+
+button {
+    width: 180px;
+    height: 80px;
+    border-radius: 1rem;
+    background: rgb(150,230,250);
+    font-size: 1.5rem;
+    margin: 2rem;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    text-align: center;
+    height: 200px;
+    width: 200px;
+    border: 1px solid black;
+    border-radius: 1rem;
+    background: rgb(248,248,243);
+    gap: 2px;
+    font-size: 1.2rem;
+    box-shadow: 4px 4px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.card .title {
+    font-size: 2rem;
+    font-style: italic;
+}
+
+.card .author {
+    font-size: 1.4rem;
+}
