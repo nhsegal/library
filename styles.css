@@ -33,12 +33,12 @@ button {
     justify-items: center;
     align-items: center;
     text-align: center;
-    height: 200px;
+    height: 270px;
     width: 200px;
     border: 1px solid black;
     border-radius: 1rem;
     background: rgb(248,248,243);
-    gap: 2px;
+    gap: 10px;
     font-size: 1.2rem;
     box-shadow: 4px 4px 2px 1px rgba(0, 0, 0, 0.2);
     margin-left: 2rem;
@@ -48,10 +48,20 @@ button {
 .card .title {
     font-size: 2rem;
     font-style: italic;
+    margin-top: 10px;
 }
 
 .card .author {
     font-size: 1.4rem;
+}
+
+.card ul {
+    text-align: left;
+}
+
+.card .read-options {
+    margin-bottom: 5px;
+    margin-top: auto;
 }
 
 .modal {
