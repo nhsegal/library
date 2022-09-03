@@ -9,7 +9,39 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<button type="button">Add Book</button>
+<button type="button" class="addBook">Add Book</button>
+<div id="deck"></div>
+<div class="modal">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <form id="bookForm">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required><br><br>
+            <label for="author">Author:</label>
+            <input type="text" id="author" name="author" required><br><br>
+          
+            <label for="number"># of pages:</label>
+            <input type="number" id="pages" name="pages"  required><br><br>
+
+            Status:
+            <ul>
+                <li>
+                    <input type="radio" id="no" name="read" value="Not started"  required>
+                    <label for="no">Haven't started reading</label><br>
+                </li>
+                <li>
+                    <input type="radio" id="reading" name="read" value="Started"  required>
+                    <label for="reading">Started but haven't finished</label><br>  
+                </li>
+                <li>
+                    <input type="radio" id="yes" name="read" value="Finished"  required>
+                    <label for="yes">Finished reading</label><br><br>
+                </li>
+            </ul>
+            <input type="submit" id="modal-submit" value="Submit">
+          </form>
+    </div>
+</div>
 <script src="script.js"></script>
 </body>
 </html>

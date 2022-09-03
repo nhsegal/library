@@ -1,7 +1,15 @@
 let myLibrary = [];
 
+const modal = document.querySelector(".modal");
+const addBookBtn = document.querySelector(".addBook");
+const closeButton = document.querySelector(".close-button");
+const submitBtn = document.querySelector("#modal-submit");
+const deck = document.querySelector("#deck");
+const bookForm = document.querySelector("#bookForm");
+let test = new Book('Lord of the Rings', 'J.R.R. Tolkien', 255, "Finished");
+
+
 function Book(title, author, pages, read) {
-  // the constructor...
   this.title = title;
   this.author = author;
   this.pages = pages;
@@ -9,19 +17,8 @@ function Book(title, author, pages, read) {
 }
 
 Book.prototype.info = function() {
-    let readstr;
-    if (this.read){
-        readstr = "read";
-    }
-    else {
-        readstr = "not read yet"
-    }
-    return `${this.title} by ${this.author}, ${this.pages} pages, ${readstr}.`
+    return `${this.title} by ${this.author}, ${this.pages} pages. I ${this.read} it.`
 }
-
-
-let test = new Book('Lord of the Rings', 'J.R.R. Tolkien', 255, true);
-
 
 
 function addBookToLibrary(book) {
@@ -29,10 +26,24 @@ function addBookToLibrary(book) {
   // do stuff here
 }
 
-function displayBooks(){
-    for (book of myLibrary) {
-    
+function addBookThruModal(e) {
+    e.preventDefault();
+    const title = document.getElementById('title').value;
+    const author = document.getElementById('author').value;
+    const pages = document.getElementById('pages').value;
+    const read = document.querySelector('input[name="read"]:checked').value;
+    book = new Book(title, author, pages, read);
+    addBookToLibrary(book);
+    displayBooks();
+}
 
+function displayBooks(){
+    
+    while (deck.firstChild) {
+        deck.removeChild(deck.lastChild);
+      }
+
+    for (book of myLibrary) {
         const title = document.createElement("div");
         title.classList.add('title');
         title.textContent = book.title;
@@ -47,23 +58,34 @@ function displayBooks(){
 
         const read = document.createElement("div");
         pages.classList.add('read');
-
-        if (book.read) {
-            read.textContent = 'Already read'
-        }
-        else {
-            read.textContent = 'Not yet read'
-        }        
-
+        read.textContent = book.read;
+    
         const card = document.createElement("div");
         card.classList.add('card');
         card.appendChild(title);
         card.appendChild(author);
         card.appendChild(pages);
         card.appendChild(read);
-        document.querySelector('body').appendChild(card);  
+        document.querySelector('#deck').appendChild(card);  
     }
 }
+
+
+
+
+
+
+
+function toggleModal() {
+    modal.classList.toggle("show-modal");
+}
+
+bookForm.addEventListener("submit", addBookThruModal);
+
+addBookBtn.addEventListener("click", toggleModal);
+closeButton.addEventListener("click", toggleModal);
+
+
 
 addBookToLibrary(test);
 displayBooks();
