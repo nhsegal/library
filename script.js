@@ -116,6 +116,11 @@ function displayBooks(){
         if (book.read == 'Finished') {
             rad3.checked = true;
         }
+
+        const removeBtn = document.createElement('button');
+        removeBtn.type = 'button';
+        removeBtn.textContent = 'Remove';
+        removeBtn.onclick = removeBook;
   
         li1.append(rad1);
         li1.append(label1);
@@ -128,16 +133,14 @@ function displayBooks(){
         list.append(li3);
         readOptions.append(list);
 
-
-
         const card = document.createElement("div");
         card.classList.add('card');
         card.appendChild(title);
         card.appendChild(author);
         card.appendChild(pages);
         card.appendChild(readOptions);
+        card.appendChild(removeBtn);
        
-
 
         document.querySelector('#deck').appendChild(card);  
     }
@@ -153,10 +156,16 @@ function changeStatus(e){
             let thisBook = myLibrary.find(o => o.title === thisTitle);
             thisBook.read = option.firstChild.value;
             console.log(thisBook.read);
-}
         }
     }
+}
     
+function removeBook(e){
+    let titleToRemove = e.target.parentElement.firstChild.textContent;
+    //let booktoRemove = myLibrary.find(o => o.title === titleToRemove);
+    myLibrary = myLibrary.filter( o => o.title !== titleToRemove);
+    displayBooks();
+}
 
 
 
