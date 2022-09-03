@@ -6,9 +6,7 @@ const closeButton = document.querySelector(".close-button");
 const submitBtn = document.querySelector("#modal-submit");
 const deck = document.querySelector("#deck");
 const bookForm = document.querySelector("#bookForm");
-//const radioButtons = document.querySelectorAll('input');
 
-//radioButtons.addEventListener(onchange, )
 
 let test = new Book('Lord of the Rings', 'J.R.R. Tolkien', 1178, "Finished");
 let test2 = new Book('The Hobbit', 'J.R.R. Tolkien', 310, "Started");
@@ -24,10 +22,12 @@ Book.prototype.info = function() {
     return `${this.title} by ${this.author}, ${this.pages} pages. I ${this.read} it.`
 }
 
-Book.prototype.changeStatus = function(status) {
+/*
+Book.prototype.changeStatus = function() {
+    const status = document.querySelectorAll('input[name="read"]:checked').value;
     this.read = status;
 }
-
+*/
 
 function addBookToLibrary(book) {
     myLibrary.push(book);
@@ -74,6 +74,8 @@ function displayBooks(){
         rad1.id = 'no';
         rad1.name = 'read'+book.title;
         rad1.value = 'Not started';
+        rad1.onclick = changeStatus;
+        
       
         const label1 = document.createElement('label');
         label1.htmlFor = 'no';
@@ -89,7 +91,8 @@ function displayBooks(){
         rad2.id = 'started';
         rad2.name ='read'+book.title;
         rad2.value = 'Started';
-        rad2.onchange = book.changeStatus;
+        rad2.onclick = changeStatus;
+     
         const label2 = document.createElement('label');
         label2.htmlFor = 'read';
         label2.textContent = " Started";
@@ -105,7 +108,8 @@ function displayBooks(){
         rad3.id = 'finished';
         rad3.name = 'read'+book.title;
         rad3.value = 'Finished';
-        rad3.onchange = book.changeStatus();
+        rad3.onclick = changeStatus;
+        
         const label3 = document.createElement('label');
         label3.htmlFor = 'read';
         label3.textContent = "  Finished";
@@ -124,7 +128,6 @@ function displayBooks(){
         list.append(li3);
         readOptions.append(list);
 
-        console.log(list)
 
 
         const card = document.createElement("div");
@@ -142,7 +145,18 @@ function displayBooks(){
 
 
 
-
+function changeStatus(e){
+    let optionsList = e.target.parentElement.parentElement.childNodes;
+    for (option of optionsList) {
+        let thisTitle = option.parentElement.parentElement.parentElement.firstChild.textContent;
+        if (option.firstChild.checked) {
+            let thisBook = myLibrary.find(o => o.title === thisTitle);
+            thisBook.read = option.firstChild.value;
+            console.log(thisBook.read);
+}
+        }
+    }
+    
 
 
 
