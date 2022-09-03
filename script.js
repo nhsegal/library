@@ -71,14 +71,14 @@ function displayBooks(){
         const rad1 = document.createElement('input');
         rad1.classList.add('radio');
         rad1.type = 'radio';
-        rad1.id = 'no';
+        rad1.id = 'no'+book.title;;
         rad1.name = 'read'+book.title;
         rad1.value = 'Not started';
         rad1.onclick = changeStatus;
         
       
         const label1 = document.createElement('label');
-        label1.htmlFor = 'no';
+        label1.htmlFor = 'no'+book.title;;
         label1.textContent = " Not yet started";
         if (book.read == 'Not started') {
             rad1.checked = true;
@@ -88,13 +88,13 @@ function displayBooks(){
         const rad2 = document.createElement('input');
         rad2.classList.add('radio');
         rad2.type = 'radio';
-        rad2.id = 'started';
+        rad2.id = 'started'+book.title;;
         rad2.name ='read'+book.title;
         rad2.value = 'Started';
         rad2.onclick = changeStatus;
      
         const label2 = document.createElement('label');
-        label2.htmlFor = 'read';
+        label2.htmlFor = 'started'+book.title;;
         label2.textContent = " Started";
         if (book.read == 'Started') {
             rad2.checked = true;
@@ -105,13 +105,13 @@ function displayBooks(){
         const rad3 = document.createElement('input');
         rad3.classList.add('radio');
         rad3.type = 'radio';
-        rad3.id = 'finished';
+        rad3.id = 'finished'+book.title;;
         rad3.name = 'read'+book.title;
         rad3.value = 'Finished';
         rad3.onclick = changeStatus;
         
         const label3 = document.createElement('label');
-        label3.htmlFor = 'read';
+        label3.htmlFor = 'finished'+book.title;;
         label3.textContent = "  Finished";
         if (book.read == 'Finished') {
             rad3.checked = true;
@@ -162,7 +162,6 @@ function changeStatus(e){
     
 function removeBook(e){
     let titleToRemove = e.target.parentElement.firstChild.textContent;
-    //let booktoRemove = myLibrary.find(o => o.title === titleToRemove);
     myLibrary = myLibrary.filter( o => o.title !== titleToRemove);
     displayBooks();
 }
@@ -170,11 +169,22 @@ function removeBook(e){
 
 
 function toggleModal() {
+    let title = document.getElementById('title');
+    title.value = '';
+    let author = document.getElementById('author');
+    author.value = '';
+    let pages = document.getElementById('pages');
+    pages.value = '';
+    let no = document.getElementById('no');
+    no.checked = false;
+    let reading = document.getElementById('reading');
+    reading.checked = false;
+    let yes = document.getElementById('yes');
+    yes.checked = false;
     modal.classList.toggle("show-modal");
 }
 
 bookForm.addEventListener("submit", addBookThruModal);
-
 addBookBtn.addEventListener("click", toggleModal);
 closeButton.addEventListener("click", toggleModal);
 
