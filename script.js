@@ -22,12 +22,7 @@ Book.prototype.info = function() {
     return `${this.title} by ${this.author}, ${this.pages} pages. I ${this.read} it.`
 }
 
-/*
-Book.prototype.changeStatus = function() {
-    const status = document.querySelectorAll('input[name="read"]:checked').value;
-    this.read = status;
-}
-*/
+
 
 function addBookToLibrary(book) {
     myLibrary.push(book);
@@ -72,17 +67,17 @@ function displayBooks(){
         radioOption1.classList.add('radio');
         radioOption1.type = 'radio';
 
-        // Appending the book title to the radio id and radio name
+        // Appending the book index to the radio id and radio name
         // groups the buttons by card and gives each label a unique id
 
-        radioOption1.id = 'no' + book.title;;
-        radioOption1.name = 'read' + book.title;
+        radioOption1.id = 'no ' + myLibrary.indexOf(book);
+        radioOption1.name = 'read ' + myLibrary.indexOf(book);
         radioOption1.value = 'Not started';
         radioOption1.onclick = changeStatus;
         
       
         const label1 = document.createElement('label');
-        label1.htmlFor = 'no' + book.title;;
+        label1.htmlFor = 'no ' + myLibrary.indexOf(book);
         label1.textContent = " Not yet started";
         if (book.read == 'Not started') {
             radioOption1.checked = true;
@@ -92,13 +87,13 @@ function displayBooks(){
         const radioOption2 = document.createElement('input');
         radioOption2.classList.add('radio');
         radioOption2.type = 'radio';
-        radioOption2.id = 'started'+book.title;;
-        radioOption2.name ='read'+book.title;
+        radioOption2.id = 'started '+ myLibrary.indexOf(book);
+        radioOption2.name ='read '+ myLibrary.indexOf(book);
         radioOption2.value = 'Started';
         radioOption2.onclick = changeStatus;
      
         const label2 = document.createElement('label');
-        label2.htmlFor = 'started' + book.title;;
+        label2.htmlFor = 'started '+ myLibrary.indexOf(book);
         label2.textContent = " Started";
         if (book.read == 'Started') {
             radioOption2.checked = true;
@@ -109,13 +104,13 @@ function displayBooks(){
         const radioOption3 = document.createElement('input');
         radioOption3.classList.add('radio');
         radioOption3.type = 'radio';
-        radioOption3.id = 'finished'+book.title;;
-        radioOption3.name = 'read'+book.title;
+        radioOption3.id = 'finished '+ myLibrary.indexOf(book);
+        radioOption3.name = 'read '+ myLibrary.indexOf(book);
         radioOption3.value = 'Finished';
         radioOption3.onclick = changeStatus;
         
         const label3 = document.createElement('label');
-        label3.htmlFor = 'finished'+book.title;;
+        label3.htmlFor = 'finished '+ myLibrary.indexOf(book);
         label3.textContent = "  Finished";
         if (book.read == 'Finished') {
             radioOption3.checked = true;
