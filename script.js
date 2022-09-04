@@ -166,15 +166,22 @@ function changeStatus(e){
 }
     
 function removeBook(e){
+
     let titleToRemove = e.target.parentElement.firstChild.textContent;
+    let cardToRemove = e.target.parentElement;
+   
     let idToRemove = e.target.parentElement.getAttribute('data-id');
-    console.log(idToRemove)
     
-    myLibrary.splice(idToRemove, 1);
-    displayBooks();
+    let deleteFunc = function () {
+        console.log('here')
+        myLibrary.splice(idToRemove, 1);
+        displayBooks();
+    }
+    
+    cardToRemove.style.transform = "scale(.01)";
+    cardToRemove.addEventListener('transitionend', deleteFunc, false);
+    
 }
-
-
 
 function toggleModal() {
     let title = document.getElementById('title');
