@@ -29,16 +29,16 @@ button {
 .card {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     justify-items: center;
     align-items: center;
     text-align: center;
-    height: 270px;
-    width: 200px;
+    height: 240px;
+    width: 250px;
     border: 1px solid black;
     border-radius: 1rem;
     background: rgb(248,248,243);
-    gap: 10px;
+    gap: 5px;
     font-size: 1.2rem;
     box-shadow: 4px 4px 2px 1px rgba(0, 0, 0, 0.2);
     margin-left: 2rem;
@@ -48,9 +48,7 @@ button {
 .card .title {
     font-size: 2rem;
     font-style: italic;
-    margin-top: 4px;
-    height: 100px;
-    
+    margin-top: 4px;  
 }
 
 .card .author {
@@ -65,19 +63,21 @@ button {
 }
 
 .card .read-options {
-   /* margin-bottom: 2px;
-    margin-top: auto;*/
+    margin-bottom: 2px;
+    margin-top: auto;
+    justify-self: flex-end;
 }
 
 .card button {
     font-size: 1rem;
-    height: 1.5rem;
+    height: 30px;
+    width: 12rem;
     flex: 0;
     background-color: rgb(210,210,210);
-    margin-bottom: 2px;
-    margin-top: auto;
+    margin-bottom: 5px;
+    margin-top: 0;
     justify-self: flex-end;
-    border: 1px solid grey;
+    border: 1px solid rgb(120,120,120);
 }
 
 .modal {
@@ -99,19 +99,30 @@ button {
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: white;
-    padding: 1rem 1.5rem;
+    padding: .5rem .5rem 0 0.5rem;
     width: 24rem;
     border-radius: 0.5rem;
 }
 
-.close-button {
+.modal-content form {
+    padding: 1rem 1rem;
+}
+.modal-content form label{
+    padding-left: 2rem;
+}
+
+.close-modal-button {
     float: right;
+    align-content: center;
     width: 1.5rem;
-    line-height: 1.5rem;
+    font-size: 2rem;
+    line-height: 1rem;
     text-align: center;
     cursor: pointer;
     border-radius: 0.25rem;
     background-color: lightgray;
+    padding-bottom: 6px;
+   
 }
 
 .close-button:hover {

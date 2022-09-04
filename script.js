@@ -2,7 +2,7 @@ let myLibrary = [];
 
 const modal = document.querySelector(".modal");
 const addBookBtn = document.querySelector(".addBook");
-const closeButton = document.querySelector(".close-button");
+const closeModalButton = document.querySelector(".close-modal-button");
 const submitBtn = document.querySelector("#modal-submit");
 const deck = document.querySelector("#deck");
 const bookForm = document.querySelector("#bookForm");
@@ -57,7 +57,7 @@ function displayBooks(){
 
         const author = document.createElement("div");
         author.classList.add('author');
-        author.textContent = "by "+book.author;
+        author.textContent = "by " + book.author;
         
         const pages = document.createElement("div");
         pages.classList.add('pages');
@@ -68,53 +68,57 @@ function displayBooks(){
 
         const list = document.createElement("ul");
         const li1 = document.createElement("li");
-        const rad1 = document.createElement('input');
-        rad1.classList.add('radio');
-        rad1.type = 'radio';
-        rad1.id = 'no'+book.title;;
-        rad1.name = 'read'+book.title;
-        rad1.value = 'Not started';
-        rad1.onclick = changeStatus;
+        const radioOption1 = document.createElement('input');
+        radioOption1.classList.add('radio');
+        radioOption1.type = 'radio';
+
+        // Appending the book title to the radio id and radio name
+        // groups the buttons by card and gives each label a unique id
+
+        radioOption1.id = 'no' + book.title;;
+        radioOption1.name = 'read' + book.title;
+        radioOption1.value = 'Not started';
+        radioOption1.onclick = changeStatus;
         
       
         const label1 = document.createElement('label');
-        label1.htmlFor = 'no'+book.title;;
+        label1.htmlFor = 'no' + book.title;;
         label1.textContent = " Not yet started";
         if (book.read == 'Not started') {
-            rad1.checked = true;
+            radioOption1.checked = true;
         }
 
         const li2 = document.createElement("li");
-        const rad2 = document.createElement('input');
-        rad2.classList.add('radio');
-        rad2.type = 'radio';
-        rad2.id = 'started'+book.title;;
-        rad2.name ='read'+book.title;
-        rad2.value = 'Started';
-        rad2.onclick = changeStatus;
+        const radioOption2 = document.createElement('input');
+        radioOption2.classList.add('radio');
+        radioOption2.type = 'radio';
+        radioOption2.id = 'started'+book.title;;
+        radioOption2.name ='read'+book.title;
+        radioOption2.value = 'Started';
+        radioOption2.onclick = changeStatus;
      
         const label2 = document.createElement('label');
-        label2.htmlFor = 'started'+book.title;;
+        label2.htmlFor = 'started' + book.title;;
         label2.textContent = " Started";
         if (book.read == 'Started') {
-            rad2.checked = true;
+            radioOption2.checked = true;
         }
 
 
         const li3 = document.createElement("li");
-        const rad3 = document.createElement('input');
-        rad3.classList.add('radio');
-        rad3.type = 'radio';
-        rad3.id = 'finished'+book.title;;
-        rad3.name = 'read'+book.title;
-        rad3.value = 'Finished';
-        rad3.onclick = changeStatus;
+        const radioOption3 = document.createElement('input');
+        radioOption3.classList.add('radio');
+        radioOption3.type = 'radio';
+        radioOption3.id = 'finished'+book.title;;
+        radioOption3.name = 'read'+book.title;
+        radioOption3.value = 'Finished';
+        radioOption3.onclick = changeStatus;
         
         const label3 = document.createElement('label');
         label3.htmlFor = 'finished'+book.title;;
         label3.textContent = "  Finished";
         if (book.read == 'Finished') {
-            rad3.checked = true;
+            radioOption3.checked = true;
         }
 
         const removeBtn = document.createElement('button');
@@ -122,11 +126,11 @@ function displayBooks(){
         removeBtn.textContent = 'Remove';
         removeBtn.onclick = removeBook;
   
-        li1.append(rad1);
+        li1.append(radioOption1);
         li1.append(label1);
-        li2.append(rad2);
+        li2.append(radioOption2);
         li2.append(label2);
-        li3.append(rad3);
+        li3.append(radioOption3);
         li3.append(label3)
         list.append(li1);
         list.append(li2);
@@ -135,6 +139,7 @@ function displayBooks(){
 
         const card = document.createElement("div");
         card.classList.add('card');
+        card.setAttribute("data-id", myLibrary.indexOf(book));
         card.appendChild(title);
         card.appendChild(author);
         card.appendChild(pages);
@@ -162,7 +167,10 @@ function changeStatus(e){
     
 function removeBook(e){
     let titleToRemove = e.target.parentElement.firstChild.textContent;
-    myLibrary = myLibrary.filter( o => o.title !== titleToRemove);
+    let idToRemove = e.target.parentElement.getAttribute('data-id');
+    console.log(idToRemove)
+    
+    myLibrary.splice(idToRemove, 1);
     displayBooks();
 }
 
@@ -186,7 +194,7 @@ function toggleModal() {
 
 bookForm.addEventListener("submit", addBookThruModal);
 addBookBtn.addEventListener("click", toggleModal);
-closeButton.addEventListener("click", toggleModal);
+closeModalButton.addEventListener("click", toggleModal);
 
 addBookToLibrary(test);
 addBookToLibrary(test2);
