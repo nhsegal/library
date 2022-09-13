@@ -8,8 +8,6 @@ const submitBtn = document.querySelector("#modal-submit");
 const deck = document.querySelector("#deck");
 const bookForm = document.querySelector("#bookForm");
 
-
-
 let bookCounter = 0;
 
 class Book {
@@ -47,7 +45,7 @@ class Book {
         radioOption1.id = 'no ' + this.id;
         radioOption1.name = 'read ' + this.id;
         radioOption1.value = 'Not started';
-        radioOption1.onclick = myLibrary.changeStatus;
+        radioOption1.onclick = this.memberOf.changeStatus;
         const label1 = document.createElement('label');
         label1.htmlFor = 'no ' + this.id;
         label1.textContent = " Not yet started";
@@ -62,7 +60,7 @@ class Book {
         radioOption2.id = 'started '+ this.id;
         radioOption2.name ='read '+ this.id;
         radioOption2.value = 'Started';
-        radioOption2.onclick = myLibrary.changeStatus;
+        radioOption2.onclick = this.memberOf.changeStatus;
         const label2 = document.createElement('label');
         label2.htmlFor = 'started '+ this.id;
         label2.textContent = " Started";
@@ -77,7 +75,7 @@ class Book {
         radioOption3.id = 'finished '+ this.id;
         radioOption3.name = 'read '+ this.id;
         radioOption3.value = 'Finished';
-        radioOption3.onclick = myLibrary.changeStatus;
+        radioOption3.onclick = this.memberOf.changeStatus;
         const label3 = document.createElement('label');
         label3.htmlFor = 'finished '+ this.id;
         label3.textContent = "  Finished";
@@ -88,7 +86,7 @@ class Book {
         const removeBtn = document.createElement('button');
         removeBtn.type = 'button';
         removeBtn.textContent = 'Remove';
-        removeBtn.onclick = myLibrary.removeBook;
+        removeBtn.onclick = this.memberOf.removeBook;
   
         li1.append(radioOption1);
         li1.append(label1);
@@ -111,6 +109,10 @@ class Book {
         card.appendChild(removeBtn);
         return (card)
     }
+
+    set whichLibrary(lib) {
+        this.memberOf = lib;
+    }
 } 
 
 
@@ -120,6 +122,7 @@ class Library {
     }
 
     addBook = (book) => {
+        book.whichLibrary = this;
         this.collection.push(book);
     }
 
@@ -146,6 +149,7 @@ class Library {
         const pages = document.getElementById('pages').value;
         const read = document.querySelector('input[name="read"]:checked').value;
         const book = new Book(title, author, pages, read);
+        book.whichLibrary = this;
         this.collection.push(book);
         this.toggleModal();
         this.displayBooks();
@@ -162,7 +166,6 @@ class Library {
     }
 
     changeStatus = (e) => {
-        console.log("changing")
         const optionsList = e.target.parentElement.parentElement.childNodes;
         for (const option of optionsList) {
             const thisTitle = option.parentElement.parentElement.parentElement.firstChild.textContent;

@@ -7,6 +7,6 @@ Subsequent Project Odin stipulation:
 
     Refactor the code to use the class constructor style. (https://www.theodinproject.com/lessons/node-path-javascript-classes)
 
-Class constructor style is in script.js. The original code is in script2.js
+Class constructor style is in script.js. The original code is in script2.js.
 
 
